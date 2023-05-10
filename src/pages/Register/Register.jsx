@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { AuthContent } from '../../providers/AuthProvider';
 
 const Register = () => {
-    const {createUser} = useContext(AuthContent);
+    const {createUser, googleLogin} = useContext(AuthContent);
 
     const handleRegister = (event) => {
         event.preventDefault();
@@ -32,6 +32,17 @@ const Register = () => {
             console.log(error);
         })
     }
+
+    const handleGoogleLogin = () => {
+      googleLogin()
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
 
     return (
@@ -53,7 +64,7 @@ const Register = () => {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
+                id="name"
                 name="name"
                 type="text"
                 placeholder="Enter Your Name"
@@ -68,7 +79,7 @@ const Register = () => {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
+                id="email"
                 name="email"
                 type="text"
                 placeholder="Enter Your Email"
@@ -83,7 +94,7 @@ const Register = () => {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
+                id="password"
                 name="password"
                 type="password"
                 placeholder="Enter Your Password"
@@ -100,7 +111,7 @@ const Register = () => {
                 <button className="bg-slate-200 rounded-full p-1">
                 <img className="w-6 h-6" src={linkdine} alt="" />
                 </button>
-                <button className="bg-slate-200 rounded-full p-1">
+                <button onClick={handleGoogleLogin} className="bg-slate-200 rounded-full p-1">
                 <img className="w-6 h-6" src={google} alt="" />
                 </button>
             </div>

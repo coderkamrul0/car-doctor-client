@@ -13,7 +13,7 @@ import { AuthContent } from "../../providers/AuthProvider";
 
 const Login = () => {
 
-    const {signIn} = useContext(AuthContent);
+    const {signIn, googleLogin,facebookLogin} = useContext(AuthContent);
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -34,6 +34,31 @@ const Login = () => {
 
     }
 
+    // google login
+    const handleGoogleLogin = () => {
+      googleLogin()
+        .then((result) => {
+          const user = result.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+
+    // facebook login
+    const handleFacebookLogin = () => {
+      facebookLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+
   return (
     <div className="grid md:grid-cols-2 w-4/5 mx-auto my-20 items-center gap-7">
       <div>
@@ -52,7 +77,7 @@ const Login = () => {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
+                id="email"
                 name="email"
                 type="text"
                 placeholder="Enter Your Email"
@@ -67,7 +92,7 @@ const Login = () => {
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
+                id="password"
                 name="password"
                 type="password"
                 placeholder="Enter Your Password"
@@ -78,13 +103,13 @@ const Login = () => {
           <div className="">
             <p className="text-center mb-3">Or sign in with</p>
             <div className="flex justify-center gap-3">
-                <button className="bg-slate-200 rounded-full p-1">
+                <button onClick={handleFacebookLogin} className="bg-slate-200 rounded-full p-1">
                 <img className="w-6 h-6" src={facebook} alt="" />
                 </button >
                 <button className="bg-slate-200 rounded-full p-1">
                 <img className="w-6 h-6" src={linkdine} alt="" />
                 </button>
-                <button className="bg-slate-200 rounded-full p-1">
+                <button onClick={handleGoogleLogin} className="bg-slate-200 rounded-full p-1">
                 <img className="w-6 h-6" src={google} alt="" />
                 </button>
             </div>

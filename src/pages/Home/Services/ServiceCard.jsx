@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 const ServiceCard = ({service}) => {
-    const {title,img,price} = service;
+    const {_id,title,img,price} = service;
     return (
         <div>
             <div className="bg-white shadow-lg rounded-lg overflow-hidden">
@@ -21,9 +21,10 @@ const ServiceCard = ({service}) => {
               </h2>
               <p className="text-[#FF3811] font-bold text-base"> Price: $ {price}</p>
             </div>
-                <Link to={'/'}>
-                    <button>
-                    < FaArrowRight className="text-[#FF3811]"/>
+                <Link to={`/checkout/${_id}`}>
+                    <button className='text-[#ff3811] font-bold border p-1'>
+                      Book Now
+                    {/* Book Now< FaArrowRight className="text-[#FF3811]"/> */}
                     </button>
                 </Link>
           </div>

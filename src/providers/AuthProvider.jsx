@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { FacebookAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import app from '../Firebase/firebase.config';
 // @ts-ignore
 export const AuthContent = createContext();
@@ -25,6 +25,20 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth,email,password)
     }
 
+    // sign in with google
+    const googleProvider = new GoogleAuthProvider();
+    const googleLogin = () => {
+        setLoading(true)
+        return signInWithPopup(auth, googleProvider)
+    }
+
+    // sign in with facebook
+    const facebookProvider = new FacebookAuthProvider();
+    const facebookLogin = () => {
+        setLoading(true)
+        return signInWithPopup(auth,facebookProvider);
+    }
+
 
     // on auth state change
     useEffect(()=>{
@@ -43,6 +57,8 @@ const AuthProvider = ({children}) => {
         loading,
         createUser,
         signIn,
+        googleLogin,
+        facebookLogin,
     }
 
     return (
