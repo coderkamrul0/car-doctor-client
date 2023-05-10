@@ -17,13 +17,14 @@ const Services = () => {
         <h2 className="text-3xl font-bold">Our Services Area</h2>
         <p>
           the majority have suffered alteration in some form, by injected
-          humour, or randomised <br /> words which don't look even slightly
+          humour, or randomised <br /> words which dont look even slightly
           believable.
         </p>
       </div>
       <div className=" grid px-5 md:px-0 gap-8 md:grid-cols-3 my-8">
         {
             services.map(service => <ServiceCard
+            // @ts-ignore
             key={service._id}
             service={service}
             ></ServiceCard>)

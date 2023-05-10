@@ -1,13 +1,19 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useContext } from "react";
+// @ts-ignore
 import img from "../../assets/images/login/login.svg";
+// @ts-ignore
 import google from '../../assets/images/login/google.png'
+// @ts-ignore
 import facebook from '../../assets/images/login/facebook.png'
+// @ts-ignore
 import linkdine from '../../assets/images/login/linkdine.png'
 import { Link } from "react-router-dom";
+import { AuthContent } from "../../providers/AuthProvider";
 
 const Login = () => {
 
+    const {signIn} = useContext(AuthContent);
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -15,6 +21,17 @@ const Login = () => {
         const email = from.email.value;
         const password = from.password.value;
         console.log(email,password);
+
+
+        signIn(email,password)
+        .then((result) => {
+            const user = result.user;
+            console.log(user);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+
     }
 
   return (
@@ -72,7 +89,7 @@ const Login = () => {
                 </button>
             </div>
           </div>
-          <p className="text-center mt-5 font-semibold"> Don't have an account? <span className="text-[#ff3811]">
+          <p className="text-center mt-5 font-semibold"> Dont have an account? <span className="text-[#ff3811]">
                 <Link to='/register'>
                 Sign up</Link>
             </span></p>
