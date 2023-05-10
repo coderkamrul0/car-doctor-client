@@ -7,6 +7,16 @@ import linkdine from '../../assets/images/login/linkdine.png'
 import { Link } from "react-router-dom";
 
 const Login = () => {
+
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+        const from = event.target;
+        const email = from.email.value;
+        const password = from.password.value;
+        console.log(email,password);
+    }
+
   return (
     <div className="grid md:grid-cols-2 w-4/5 mx-auto my-20 items-center gap-7">
       <div>
@@ -15,7 +25,7 @@ const Login = () => {
       <div>
         <div className="border border-slate-200  mx-auto p-5 md:p-20">
             <h3 className="text-center text-3xl font-bold pb-10">Login</h3>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="mb-7">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
